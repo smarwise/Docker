@@ -1,1 +1,5 @@
 eval $(docker-machine env Char)
+
+#eval is a built-in Linux command which is used
+# to execute arguments as a shell command.
+#Display the commands to set up the environment for the Docker client
