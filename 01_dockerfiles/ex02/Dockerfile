@@ -1,5 +1,5 @@
-FROM ft-rails:on-build
+FROM ft-rails:latest
 
 EXPOSE 3000
 
-CMD ["rails", "s", "-b", "0.0.0.0", "-p", "3000"]
+CMD ["rails", "server", "-p", "3000"]

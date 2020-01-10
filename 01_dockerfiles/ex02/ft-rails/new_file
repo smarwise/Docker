@@ -1,0 +1,30 @@
+FROM ruby:latest
+
+RUN apt-get update
+RUN apt-get -y install nodejs
+RUN gem install rails
+RUN rails new demo
+RUN cd demo
+RUN bundle install
+RUN bundle exec rake test
+RUN bundle exec rails server
+RUN apt-get update && apt-get install -y \ 
+  build-essential \ 
+  nodejs
+RUN mkdir -p /app 
+WORKDIR /app
+COPY Gemfile Gemfile.lock ./ 
+RUN gem install bundler && bundle install --jobs 20 --retry 5
+RUN apt-get -y install yarn
+#create new rails application
+RUN gem install bundler:2.1.2
+# RUN  gem update --system
+RUN bundle update --bundler
+RUN gem install rails bundler:2.1.2
+COPY . ./
+EXPOSE 3000
+CMD ["bundle", "exec", "rails", "server", "-b", "0.0.0.0"]
+# RUN gem install sqlite3
+# RUN apt-get -y install nodejs
+# RUN gem install rails
+# RUN rails new blog
