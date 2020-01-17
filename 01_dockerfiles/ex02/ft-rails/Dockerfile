@@ -1,20 +1,16 @@
 FROM ruby:2.5.5
 
 RUN apt-get update
-RUN apt-get upgrade -y
-RUN apt-get install -y rails
-RUN apt-get install -y git
-RUN gem pristine --all
-ONBUILD  RUN mkdir -p /opt/app
-# ONBUILD WORKDIR /home
-# ONBUILD RUN cd /home && git clone https://github.com/smarwise/docker-rails-app.git app
-ONBUILD RUN git clone https://github.com/smarwise/docker-rails-app.git /opt/app
+RUN apt-get install -y rails build-essential
+# RUN gem install puma
+ONBUILD RUN rails new /opt/app
 ONBUILD WORKDIR /opt/app
-ONBUILD RUN for i in `gem list --no-versions`; do gem uninstall -aIx $i; done
-ONBUILD RUN gem install rake
-ONBUILD RUN gem pristine --all
+ONBUILD RUN rm -rf Gemfile.lock
 ONBUILD RUN bundle update
-ONBUILD RUN chmod go-w  /usr/local/bundle
+ONBUILD EXPOSE 3000
+###stop here######ersion
 # ONBUILD RUN rake db:migrate
 # docker build -t ft-rails .
 # docker container run -it -p 3000:3000 ruby bash
+# RUN wget https://cache.ruby-lang.org/pub/ruby/2.5/ruby-2.5.5.tar.bz2
+# RUN tar xvf ruby-2.5.5.tar.bz2
