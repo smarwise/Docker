@@ -1,1 +1,4 @@
-apk update && apk add git gcc musl-dev
+apt-get update && apt-get install git gcc musl-dev -y
+
+#docker run --rm -it debian bash
+#git clone https://github.com/dpavankvarma/C-Programming-Examples.git
