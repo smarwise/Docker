@@ -1,8 +1,8 @@
 FROM ft-rails:on-build
 
 EXPOSE 3000
-RUN hostname
+
 CMD ["rails", "s", "-b", "0.0.0.0", "-p", "3000"]
 
-#docker build -t ex02 .
-#docker run -it --rm -p 3000:3000 ex02
+#docker build  .
+#docker run -it --rm -p 3000:3000 
